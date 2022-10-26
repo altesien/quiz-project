@@ -1,15 +1,33 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import { collection, addDoc } from "firebase/firestore"
+import db from './firebase/init.js'
 
 export default {
   name: 'App',
+  created() {
+    console.log("working")
+  },
   components: {
-    HelloWorld
+    
+  },
+  methods : {
+    async createUser(){
+      const colRef = collection(db, 'users')
+      const dataObj = {
+        firstname: "lor",
+        lastname: "ja",
+        dob: "1991"
+      }
+
+      const docRef = await addDoc(colRef,dataObj)
+      console.log("document was created with ID:", docRef.id)
+    }
   }
 }
 </script>
