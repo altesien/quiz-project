@@ -15,6 +15,7 @@ export const store = reactive({
     currentQuestion: 0,
     step: 0,
     showAnswer: false,
+    rationale:'',
     incrementScore() {
         this.score++;
     },
@@ -43,9 +44,28 @@ export const store = reactive({
           // create document and return reference to it
         const questions = []
         const docRef = await getDocs(colRef)
-        docRef.forEach((doc) =>{
-            const info = doc.data()            
-            info.shuffled_answers = shuffle([info.Answer, ...info.Others])            
+
+        console.log(docRef)
+        let limitQuestion = []
+
+        docRef.forEach((doc) => {
+            limitQuestion.push(doc)
+        })
+
+        limitQuestion = shuffle(limitQuestion).slice(0,4)
+
+
+        limitQuestion.forEach((doc) =>{
+            const info = doc.data() 
+            console.log(info.Others)
+            
+            const wrong = []
+            Object.entries(info.Others).forEach(([k,item]) => {
+              wrong.push(item)
+            })
+
+
+            info.shuffled_answers = shuffle([[info.Answer,"Result"], ...wrong])            
             questions.push(info)
         })        
         console.log(questions)
@@ -72,12 +92,15 @@ export const store = reactive({
         // })
     
       },
-      checkAnswer(answer) {
+      checkAnswer(answer,reason) {
         if (this.data[this.currentQuestion].Answer == answer) {
           this.incrementScore();
           this.showAnswer = true;
           this.data[this.currentQuestion].guessedRight = true;
           return;
+        }
+        else{
+          this.rationale = reason
         }
         this.data[this.currentQuestion].guessedRight = false;
         this.showAnswer = true;
@@ -87,6 +110,7 @@ export const store = reactive({
           this.quizEnded = true;
           this.step = 2;
         }
+        this.rationale = ''
         this.currentQuestion += 1;
         this.showAnswer = false;
       },

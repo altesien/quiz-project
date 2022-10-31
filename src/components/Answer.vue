@@ -3,6 +3,7 @@ import { store } from '.././store';
 export default {
   props: {
     text: String,
+    reason: String,
     isValidAnswer: Boolean,
     isInvalidAnswer: Boolean,
   },
@@ -17,7 +18,7 @@ export default {
 <template>
   <button
     class="w-full bg-gray-200 rounded-lg p-4 transition md:text-lg md:p-6"
-    @click="store.checkAnswer(text)"
+    @click="store.checkAnswer(text,reason)"
     v-html="text"
     :disabled="store.showAnswer"
     :class="{
