@@ -15,6 +15,7 @@ export const store = reactive({
     currentQuestion: 0,
     step: 0,
     showAnswer: false,
+    showModal: false,
     rationale:'',
     incrementScore() {
         this.score++;
@@ -36,7 +37,6 @@ export const store = reactive({
     },
     async getData() {
         this.loading = true;
-        console.log("Grabbing Data")
 
         const colRef = collection(db, 'Questions')
 
@@ -45,7 +45,6 @@ export const store = reactive({
         const questions = []
         const docRef = await getDocs(colRef)
 
-        console.log(docRef)
         let limitQuestion = []
 
         docRef.forEach((doc) => {
@@ -57,7 +56,6 @@ export const store = reactive({
 
         limitQuestion.forEach((doc) =>{
             const info = doc.data() 
-            console.log(info.Others)
             
             const wrong = []
             Object.entries(info.Others).forEach(([k,item]) => {
@@ -68,7 +66,7 @@ export const store = reactive({
             info.shuffled_answers = shuffle([[info.Answer,"Result"], ...wrong])            
             questions.push(info)
         })        
-        console.log(questions)
+
         this.data = questions
         this.currentQuestion = 0;
         this.showAnswer = false;
@@ -91,6 +89,12 @@ export const store = reactive({
 
         // })
     
+      },
+      async saveUser(info){
+        const colRef = collection(db, 'Users')
+        const docRef = await addDoc(colRef, info)
+        console.log("doc is",docRef.id)
+
       },
       checkAnswer(answer,reason) {
         if (this.data[this.currentQuestion].Answer == answer) {

@@ -1,6 +1,13 @@
 <template>
     <Loader v-if="store.loading"></Loader>
-    <div v-else class="grid grid-rows-6 grid-cols-1 text-gray-600 mx-auto w-11/12 md:w-8/12 lg:w-7/12 overflow-y-hidden custom-height">
+    <div v-else-if="store.showModal">
+        <modal/>
+    </div>
+    <div v-else class=" relative grid grid-rows-5 grid-cols-1 text-gray-600 mx-auto w-11/12 md:w-8/12 lg:w-7/12 overflow-y-hidden custom-height">
+        <button class="absolute top-2 right-2" id="search-button" @click="showModal">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16"> <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/> <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/> </svg>
+        </button>            
+
         <div class="row-span-1">
             <div class="min-h-full py-4 rounded-lg flex flex-col items-center">
                 <div class="flex my-4 row">
@@ -22,7 +29,7 @@
                 </div>                
             </div>
         </div>
-        <div class="row-span-">
+        <div class="row-span-1">
             <div class="min-h-full flex flex-col justify-center">
                 <div class="grid grid-cols-1 gap-4 md:gap-4 md:grid-cols-2">
                 <Answer
@@ -65,6 +72,8 @@
 <script>
 import { store } from '.././store';
 import Answer from '../components/Answer.vue'
+import Modal from '../components/modal.vue'
+
 export default {
     
     setup() {
@@ -72,15 +81,23 @@ export default {
     },
     data () {
         return {
-            store
+            store,
+            
         }
     },
     components: {
-        Answer
+        Answer,
+        Modal
     },
     created() {
         this.store.getData();
     },
+    methods: {
+        showModal: function() {
+            console.log("pressed")
+            store.showModal = true;
+        }
+    }
 }
 </script>
 

@@ -54,7 +54,7 @@
                     <div class="carousel__item">
                         <div class="grid grid-cols-1">
                             <span class="mx-10">
-                                
+                                Game explination
                             </span>
                             <br/>
                             <span class="mx-10">

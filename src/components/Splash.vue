@@ -1,6 +1,6 @@
 <template>
     <Loader v-if="store.loading"></Loader>
-    <div v-else class="w-11/12 mx-auto grid grid-cols-1 gap-y-8 lg:w-5/12">
+    <div v-else class="w-11/12 mx-auto grid grid-cols-1 gap-y-8 lg:w-10/12">
         <data-carousel/>
 
         <button class="mt-auto px-12 py-4 bg-gray-600 text-white text-lg rounded-md hover:bg-gray-700 transition w-full" @click="startQuiz()">Start Quiz</button>

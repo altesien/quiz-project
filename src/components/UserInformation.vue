@@ -1,41 +1,74 @@
 <template>
-    <div class="flex flex-col">
+    <div class="flex flex-col justify-center items-center">
         <div>
+            <span>Congratulations you got {{store.score}}/6</span>
         </div>
-        <form class="mb-4 mx-5 px-2 flex flex-col">
-            <label class="block mb-1 text-sm">                
-                <div v-if="v$.fname.$error">First name has an issue</div>
-            </label>
-            <input id="fname" 
-                class="px-4 py-2 w-1/2 border-gray-400 border rounded focus:border focus:border-blue-500 focus:shadow-outline outline-none" 
-                v-model="fname"  
-                @blur="v$.name.$touch" 
-                type="text" 
-                placeholder="First Name"/>
+
+        <br/>
+        <form class="mb-4 mx-5 px-2">
+            <div class="">
+                <input 
+                    class="px-4 py-2 border-gray-400 border rounded focus:border focus:border-blue-500 focus:shadow-outline outline-none" 
+                    placeholder="Enter first name" 
+                    type="text" 
+                    v-model="v$.fname.$model"
+                    @blur="v$.fname.$touch" 
+                    :class="{'errors' : v$.fname.$errors.length > 0}"
+                    >
+                <!-- Error Message -->
+                <div class="input-errors" v-for="(error, index) of v$.fname.$errors" :key="index">
+                    <div class="error-msg">{{ error.$message }}</div>
+                </div>
+            </div>
+
             <br/>
-            <input id="lname" 
-                class="px-4 py-2 w-1/2 border-gray-400 border rounded focus:border focus:border-blue-500 focus:shadow-outline outline-none" 
-                v-model="lname"  
-                @blur="v$.name.$touch" 
-                type="text" 
-                placeholder="Last Name"/>     
-            <br/>       
-            <input id="email" 
-                class="px-4 py-2 w-1/2 border-gray-400 border rounded focus:border focus:border-blue-500 focus:shadow-outline outline-none" 
-                v-model="email"  
-                @blur="v$.name.$touch" 
-                type="text" 
-                placeholder="Email"/> 
+            <div class="">
+                <input 
+                    class="px-4 py-2 border-gray-400 border rounded focus:border focus:border-blue-500 focus:shadow-outline outline-none" 
+                    placeholder="Enter last name" 
+                    type="text" 
+                    v-model="v$.lname.$model"
+                    @blur="v$.lname.$touch" 
+                    :class="{'errors' : v$.lname.$errors.length > 0}"
+                    >
+                <!-- Error Message -->
+                <div class="input-errors" v-for="(error, index) of v$.lname.$errors" :key="index">
+                    <div class="error-msg">{{ error.$message }}</div>
+                </div>
+            </div>
+            <br/>      
+            <div class="">
+                <input 
+                    class="px-4 py-2 border-gray-400 border rounded focus:border focus:border-blue-500 focus:shadow-outline outline-none" 
+                    placeholder="Enter email" 
+                    type="text" 
+                    v-model="v$.email.$model"
+                    @blur="v$.email.$touch" 
+                    :class="{'errors' : v$.email.$errors.length > 0}"
+                    >
+                <!-- Error Message -->
+                <div class="input-errors" v-for="(error, index) of v$.email.$errors" :key="index">
+                    <div class="error-msg">{{ error.$message }}</div>
+                </div>
+            </div>
             <br/>
-            <input id="company" 
-                class="px-4 py-2 w-1/2 border-gray-400 border rounded focus:border focus:border-blue-500 focus:shadow-outline outline-none" 
-                v-model="company"  
-                @blur="v$.name.$touch" 
-                type="text" 
-                placeholder="Company"/>
+            <div class="">
+                <input 
+                    class="px-4 py-2 border-gray-400 border rounded focus:border focus:border-blue-500 focus:shadow-outline outline-none" 
+                    placeholder="Enter Company" 
+                    type="text" 
+                    v-model="v$.company.$model"
+                    @blur="v$.company.$touch" 
+                    :class="{'errors' : v$.company.$errors.length > 0}"
+                    >
+                <!-- Error Message -->
+                <div class="input-errors" v-for="(error, index) of v$.company.$errors" :key="index">
+                    <div class="error-msg">{{ error.$message }}</div>
+                </div>
+            </div>
         </form>
         <button
-            @click="store.restartQuiz"
+            @click="handleSubmit()"
             class="px-12 py-4 bg-gray-600 text-white text-lg rounded-lg hover:bg-gray-700 transition w-full md:w-1/3"
         >
             Reset
@@ -43,17 +76,33 @@
     </div>
 </template>
 
+<style>
+.errors {
+    --tw-border-opacity: 1;
+    border-color: rgba(252, 165, 165, var(--tw-bg-opacity)) !important;
+}
+
+</style>
+
 <script>
+
+export function validName(name) {
+  let validNamePattern = new RegExp("^[a-zA-Z]+(?:[-'\\s][a-zA-Z]+)*$");
+  if (validNamePattern.test(name)){
+    return true;
+  }
+  return false;
+}
+
+
 import { store } from '.././store';
 import { useVuelidate } from '@vuelidate/core'
-import { required } from '@vuelidate/validators'
+import { required, email, minLength } from '@vuelidate/validators'
 
 export default {
     
     setup() {
-        return {
-           v$: useVuelidate()
-        }        
+        return { v$: useVuelidate() }        
     },
     data () {
         return {
@@ -62,17 +111,46 @@ export default {
             lname:"",
             email:"",
             company:"",
+            submitted: false
         }
     },
     validations () {
         return {
-            fname: {required},
-            lname: {required},
-            email: {required}
+            fname: {required,min: minLength(1), name_validator: {
+                $validator: validName,
+                $message: "Invalid Name. Valid name doesn't contain any special characters"
+            }},
+            lname: {required, name_validator: {
+                $validator: validName,
+                $message: "Invalid Name. Valid name doesn't contain any special characters"
+            }},
+            email: {required, email},
+            company: {required}
         }
     },
     created() {
         this.store.getData();
     },
+    methods : {
+        handleSubmit(e) {
+            this.submitted = true
+
+            this.v$.touch
+            if(this.v$.$invalid){
+                console.log("invalid")
+                return
+            }else {
+                store.saveUser({
+                    "fname": this.fname,
+                    "lname": this.lname,
+                    "email": this.email,
+                    "company": this.company,
+                    "score": this.store.score
+                })
+                store.restartQuiz
+                console.log("submit")
+            }
+        }
+    }
 }
 </script>

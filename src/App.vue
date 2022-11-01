@@ -1,5 +1,5 @@
 <template>
-  <div class="text-gray-700 bg-white h-90v container mx-auto pb-5 my-4 rounded-lg shadow-2xl">
+  <div class="text-gray-700 bg-white h-80v mx-auto w-4/5 pb-5 my-4 rounded-lg shadow-2xl">
     <h1 class="text-center text-3xl my-12 fond-bold">
             SR & ED
     </h1>
