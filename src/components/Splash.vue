@@ -1,9 +1,9 @@
 <template>
     <Loader v-if="store.loading"></Loader>
-    <div v-else class="w-11/12 mx-auto grid grid-cols-1 gap-y-8 lg:w-10/12">
+    <div v-else class="w-11/12 mx-auto bg-transparent grid grid-cols-1 gap-y-8 lg:w-10/12">
         <data-carousel/>
 
-        <button class="mt-auto px-12 py-4 bg-gray-600 text-white text-lg rounded-md hover:bg-gray-700 transition w-full" @click="startQuiz()">Start Quiz</button>
+        <!-- <button :class="{'opacity-40 cursor-not-allowed': !store.competedCarousel}" class="mt-auto px-12 py-4 bg-green-400 hover:bg-green-600 text-gray-700 text-lg rounded-md transition w-full" @click="startQuiz()">Start Quiz</button> -->        
     </div>
 </template>
 
@@ -17,11 +17,13 @@ onMounted(()=> {
     store.loading = false;
 })
 
-const startQuiz = () => {
-    store.startQuiz({
-        category: "SR&ED"
-    })
-}
+// const startQuiz = () => {
+//     if(store.competedCarousel) {
+//         store.startQuiz({
+//             category: "SR&ED"
+//         })
+//     }
+// }
 
 </script>
 

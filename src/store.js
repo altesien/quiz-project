@@ -17,6 +17,7 @@ export const store = reactive({
     showAnswer: false,
     showModal: false,
     rationale:'',
+    competedCarousel: false,
     incrementScore() {
         this.score++;
     },
@@ -27,6 +28,8 @@ export const store = reactive({
         this.quizEnded = false
         this.data = null
         this.loading = true;
+        this.rationale = '';
+        this.competedCarousel = false;
     },
     setQuestionCOunt(count) {
         this.questionCount = count;

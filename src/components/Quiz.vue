@@ -4,7 +4,7 @@
         <modal/>
     </div>
     <div v-else class=" relative grid grid-rows-5 grid-cols-1 text-gray-600 mx-auto w-11/12 md:w-8/12 lg:w-7/12 overflow-y-hidden custom-height">
-        <button class="absolute top-2 right-2" id="search-button" @click="showModal">
+        <button class="absolute top-2 right-2 bg-white rounded-xl" id="search-button" @click="showModal">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16"> <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/> <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/> </svg>
         </button>            
 
@@ -21,7 +21,7 @@
                         }"
                     ></div>
                 </div>
-                <div class="border-4 border-gray-400 p-3 w-full rounded-lg shadow-xl flex items-center justify-center md:p-5 mb-3">
+                <div class="border-4 bg-gray-200 border-gray-400 p-3 w-full rounded-lg shadow-xl flex items-center justify-center md:p-5 mb-3">
                     <h1
                         class="text-center font-medium md:text-lg"
                         v-html="store.data[store.currentQuestion].Question"
@@ -47,18 +47,19 @@
             </div>
         </div>
             <div class="my-4">
-                <div class="min-h-full min-w-full flex-col items-center justify-center">
+                <div class="min-h-full min-w-full flex-col items-center justify-center text-gray-200">
                     <Transition name="grow-fade">
                         <div v-if="store.rationale != ''" class="my-4">
-                            <div class="">
+                            <div class="text-gray-100">
                                 {{store.rationale}}
                             </div>
                         </div>
                     </Transition>
+                    <br/>
                     <Transition name="grow-fade">
                         <button
                             @click="store.getNextQuestion"
-                            class="px-12 py-4 bg-gray-600 text-white text-lg rounded-lg hover:bg-gray-700 transition w-full"
+                            class="px-12 py-4 bg-green-400 hover:bg-green-600 text-gray-700 text-lg rounded-lg transition w-full"
                             v-show="store.showAnswer"
                         >Next
                         </button>

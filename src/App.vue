@@ -1,8 +1,15 @@
 <template>
-  <div class="text-gray-700 bg-white h-80v mx-auto w-4/5 pb-5 my-4 rounded-lg shadow-2xl">
-    <h1 class="text-center text-3xl my-12 fond-bold">
+  <div class="text-gray-100 bg-transparent h-80v mx-auto w-4/5 pb-5 my-4">
+    <!-- <h1 class="text-center text-3xl my-12 fond-bold">
             SR & ED
-    </h1>
+    </h1> -->
+    <br/>
+    <div class="flex">
+      <img class="transform rotate-36 w-2/5" src="./assets/SRED/sred.png">
+      <div class="w-1/5 m-7"></div>
+      <img class="transform rotate-23 w-2/5" src="./assets/SRED/rd.png">
+    </div>
+    <br/>
     <Splash v-if="store.step == 0"/>
     <Quiz v-if="store.step ==1"/>
     <UserInformation v-if="store.step ==2"/>
@@ -44,6 +51,12 @@ body {
   /* background-color: #f9f9f9;
   background: #f9f9f9; */
   height: 100vh;
+
+  /* background-color: #00294C;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 1600 800'%3E%3Cg stroke='%23000' stroke-width='66.6' stroke-opacity='0.05' %3E%3Ccircle fill='%2300294C' cx='0' cy='0' r='1800'/%3E%3Ccircle fill='%23002c51' cx='0' cy='0' r='1700'/%3E%3Ccircle fill='%23013056' cx='0' cy='0' r='1600'/%3E%3Ccircle fill='%2301335b' cx='0' cy='0' r='1500'/%3E%3Ccircle fill='%23023660' cx='0' cy='0' r='1400'/%3E%3Ccircle fill='%23023a65' cx='0' cy='0' r='1300'/%3E%3Ccircle fill='%23033d6a' cx='0' cy='0' r='1200'/%3E%3Ccircle fill='%2303416f' cx='0' cy='0' r='1100'/%3E%3Ccircle fill='%23034474' cx='0' cy='0' r='1000'/%3E%3Ccircle fill='%23044879' cx='0' cy='0' r='900'/%3E%3Ccircle fill='%23044c7e' cx='0' cy='0' r='800'/%3E%3Ccircle fill='%23044f84' cx='0' cy='0' r='700'/%3E%3Ccircle fill='%23045389' cx='0' cy='0' r='600'/%3E%3Ccircle fill='%2303578e' cx='0' cy='0' r='500'/%3E%3Ccircle fill='%23035b94' cx='0' cy='0' r='400'/%3E%3Ccircle fill='%23025e99' cx='0' cy='0' r='300'/%3E%3Ccircle fill='%2301629f' cx='0' cy='0' r='200'/%3E%3Ccircle fill='%230066A4' cx='0' cy='0' r='100'/%3E%3C/g%3E%3C/svg%3E");
+  background-attachment: fixed;
+  background-size: cover; */
+
 
   background-color: #0066A4;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 1600 800'%3E%3Cg stroke='%23000' stroke-width='66.7' stroke-opacity='0.02' %3E%3Ccircle fill='%230066A4' cx='0' cy='0' r='1800'/%3E%3Ccircle fill='%23135f9d' cx='0' cy='0' r='1700'/%3E%3Ccircle fill='%231d5995' cx='0' cy='0' r='1600'/%3E%3Ccircle fill='%2324538e' cx='0' cy='0' r='1500'/%3E%3Ccircle fill='%23284c86' cx='0' cy='0' r='1400'/%3E%3Ccircle fill='%232c467e' cx='0' cy='0' r='1300'/%3E%3Ccircle fill='%232e4077' cx='0' cy='0' r='1200'/%3E%3Ccircle fill='%232f3a6f' cx='0' cy='0' r='1100'/%3E%3Ccircle fill='%23303467' cx='0' cy='0' r='1000'/%3E%3Ccircle fill='%23302e5f' cx='0' cy='0' r='900'/%3E%3Ccircle fill='%232f2957' cx='0' cy='0' r='800'/%3E%3Ccircle fill='%232e2350' cx='0' cy='0' r='700'/%3E%3Ccircle fill='%232d1e48' cx='0' cy='0' r='600'/%3E%3Ccircle fill='%232b1840' cx='0' cy='0' r='500'/%3E%3Ccircle fill='%23291339' cx='0' cy='0' r='400'/%3E%3Ccircle fill='%23260e32' cx='0' cy='0' r='300'/%3E%3Ccircle fill='%2323072b' cx='0' cy='0' r='200'/%3E%3Ccircle fill='%23210024' cx='0' cy='0' r='100'/%3E%3C/g%3E%3C/svg%3E");
