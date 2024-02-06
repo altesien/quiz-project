@@ -1,0 +1,19 @@
+- identifier: Quiz
+  title: Quiz
+  team: [Commissioning]
+  icon: DefaultBlueprint
+  blueprint: deployment
+  properties:
+    time: '2024-02-06T14:56:57.636Z'
+    deployment_duration: 10
+    status: Success
+    commit_hash: string
+    gitlab_branch_url: 
+    gitlab_branch: string
+    gitlab_merge_request: https://example.com
+    gitlab_pipeline: https://example.com
+    image_tag: string
+    user: string
+    sonarqube_report: https://example.com
+  relations:
+    running-service: related_entity_identifier
