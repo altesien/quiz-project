@@ -2,7 +2,6 @@ import { initializeApp } from "firebase/app"
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyC_LbdQ6N4vpmT9Oc-8aCHkLeV0wVp1poM",
     authDomain: "bell-quiz.firebaseapp.com",
     projectId: "bell-quiz",
     storageBucket: "bell-quiz.appspot.com",
